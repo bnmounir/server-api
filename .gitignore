@@ -2,3 +2,4 @@ node_modules
 yarn.lock
 keys.js
 app.yaml
+.gcloudignore
