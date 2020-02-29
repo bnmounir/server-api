@@ -9,6 +9,9 @@
         "dev": "nodemon index.js",
         "start": "node index.js"
     },
+    "engines": {
+        "node": "^12.16.1"
+    },
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
