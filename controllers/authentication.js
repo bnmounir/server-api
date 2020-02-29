@@ -38,6 +38,6 @@ module.exports = {
         });
     },
     login: (req, res, next) => {
-        next();
+        res.json({ token: userToken(req.user) });
     }
 };
