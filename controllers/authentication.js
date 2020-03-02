@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const jwt = require('jwt-simple');
 
 function userToken(user) {
@@ -40,6 +41,34 @@ module.exports = {
         });
     },
     login: (req, res, next) => {
-        res.json({ token: userToken(req.user) });
+        const { email, password } = req.body;
+        if (!email) {
+            return res.status(422).json({
+                error: 'email is required'
+            });
+        }
+
+        if (!password) {
+            return res.status(422).json({
+                error: 'password is required'
+            });
+        }
+
+        passport.authenticate(
+            'local',
+            { session: false },
+            (err, passportUser, info) => {
+                if (err) return next(err);
+                if (!passportUser) {
+                    return res
+                        .status(401)
+                        .json({ error: 'email or password is incorrect' });
+                }
+                if (passportUser) {
+                    return res.json({ token: userToken(passportUser) });
+                }
+                return res.status(404).json(info);
+            }
+        )(req, res, next);
     }
 };

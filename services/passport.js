@@ -12,9 +12,10 @@ const localLogin = new LocalStrategy(
             if (!user) return done(null, false);
 
             user.comparePassword(password, function(err, isMatch) {
-                if (err) return done(err);
+                if (err) return done(err, null, { error: 'error 15 passport' });
 
-                if (!isMatch) return done(null, false);
+                if (!isMatch)
+                    return done(null, false, { error: 'password incorrect' });
 
                 return done(null, user);
             });

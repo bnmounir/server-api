@@ -5,7 +5,7 @@ const passport = require('passport');
 const passportConfig = require('./services/passport');
 
 const requireAuth = passport.authenticate('jwt', { session: false });
-const requireLogin = passport.authenticate('local', { session: false });
+// const requireLogin = passport.authenticate('local', { session: false });
 
 router.get('/', (req, res) => {
     res.send({ message: 'welcome to the api' });
@@ -16,6 +16,6 @@ router.get('/auth', requireAuth, (req, res) => {
 });
 
 router.post('/signup', signup);
-router.post('/login', requireLogin, login);
+router.post('/login', login);
 
 module.exports = router;
