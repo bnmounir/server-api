@@ -11,9 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 app.use('/', routes);
-app.use(cors());
 
 // Connecting Mongoose to MongoDB atlas
 mongoose
