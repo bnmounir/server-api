@@ -3,3 +3,4 @@ yarn.lock
 keys.js
 app.yaml
 .gcloudignore
+.env

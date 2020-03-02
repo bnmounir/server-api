@@ -1,10 +1,8 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const bcrypt = require('bcryptjs');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 
 const User = require('../models/User');
-const { SECRET_JWT } = require('../keys');
 
 const localLogin = new LocalStrategy(
     { usernameField: 'email' },
@@ -26,7 +24,7 @@ const localLogin = new LocalStrategy(
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-    secretOrKey: SECRET_JWT
+    secretOrKey: process.env.SECRET_JWT
 };
 
 const jwtLogin = new Strategy(jwtOptions, (payload, done) => {

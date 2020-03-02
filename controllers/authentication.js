@@ -1,10 +1,12 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jwt-simple');
-const { SECRET_JWT } = require('../keys');
 
 function userToken(user) {
-    return jwt.encode({ sub: user.id, iat: Date.now() }, SECRET_JWT);
+    return jwt.encode(
+        { sub: user.id, iat: Date.now() },
+        process.env.SECRET_JWT
+    );
 }
 
 module.exports = {
